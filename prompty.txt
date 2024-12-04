@@ -1,0 +1,40 @@
+Potrzebuję twojej pomocy w napisaniu programu w C++, który będzie wykonywał pewne operacje na grafie skierowanym. Pierwszym etapem będzie napisanie funkcji do wczytania grafu z pliku .txt napisanego przez człowieka w odpowiedni sposób do struktury danych, oraz analogicznej funkcji wypisującej graf do pliku w takim samym formacie.
+Format każdego wiersza w pliku jest następujący:
+<numer wierzchołka> : <numer następnika> <numer innego następnika>
+Każdy wierzchołek oraz jego następniki są rozpisane w osobnym wierszu.
+W przypadku, kiedy dany wierzchołek nie ma żadnych następników, wtedy wiersz w pliku wygląda następująco:
+<numer wierzchołka> : 
+Niech program będzie możliwie prosty, a nazwy zmiennych i funkcji możliwie krótkie i czytelne.
+
+
+Następnym krokiem będzie napisanie funkcji sprawdzającej czy podany graf jest 1-grafem. 1-graf to taki graf, który nie posiada krawędzi wielokrotnych z jednego wierzchołka do drugiego. Sygnatura tej funkcji wygląda następująco:
+bool isOneGraph(unordered_map<int, vector<int>> &graph) {}
+Nie musisz wypisywać całego programu, tylko tą funkcję. Niech program będzie możliwie prosty, a nazwy zmiennych i funkcji możliwie krótkie i czytelne.
+
+Następnym krokiem będzie napisanie funkcji sprawdzającej czy podany graf jest sprzężony. Graf sprzężony to taki, gdzie dla każdej pary wierzchołków grafu, ich zbiory (bezpośrednich) następników muszą być albo rozłączne, albo identyczne. Sygnatura tej funkcji wygląda następująco:
+bool isAdjoint(unordered_map<int, vector<int>> &graph) {}
+Nie musisz wypisywać całego programu, tylko tą funkcję. Niech program będzie możliwie prosty, a nazwy zmiennych i funkcji możliwie krótkie i czytelne.
+
+Następnym krokiem będzie napisanie funkcji sprawdzającej czy podany graf jest liniowy. Graf liniowy to taki graf, który nie zawiera w sobie jednego z tych podgrafów:
+1 : 2 3
+2 : 4
+3 : 4
+4 : 
+lub
+1 : 2 3
+2 : 1
+3 : 1
+lub
+1 : 1 2
+2 : 1 2
+Sygnatura tej funkcji wygląda następująco:
+bool isLinear(unordered_map<int, vector<int>> &graph) {}
+Nie musisz wypisywać całego programu, tylko tą funkcję. Niech program będzie możliwie prosty, a nazwy zmiennych i funkcji możliwie krótkie i czytelne.
+
+Następnym krokiem będzie napisanie funkcji przekształcającej jeden graf w drugi. Przekształcenie grafu G w graf H można zrealizować najprostszym sposobem podanym poniżej. Każdy wierzchołek z G zamieniamy najpierw na osobny łuk w H. Następnie, dla każdego łuku w G realizujemy odpowiednie połączenie w H poprzez przeindeksowanie wierzchołków z H. Przykładowo, dla grafu G złożonego z łuków (a,b), (b,c), (b,d), (d,a), tworzymy graf H najpierw jako taki zbiór rozłącznych łuków: (1,2), (3,4), (5,6), (7,8), które reprezentują odpowiednio wierzchołki a, b, c, d. Następnie należy odtworzyć jeden do jednego połączenia obecne w G w następujący sposób. Mamy łuk (a,b) w G, czyli w H musi być przejście ze zgodnym zwrotem z łuku odpowiadającego a do łuku odpowiadającego b. Dla rozłącznych obecnie łuków (1,2) i (3,4) potrzebujemy więc skompresować wierzchołki 2 i 3 do jednego, co łatwo uczynić przez przeindeksowanie w zbiorze wszystkich wystąpień 3 na 2. Otrzymujemy łuki (1,2), (2,4), (5,6), (7,8). Tak samo należy postąpić dla wszystkich łuków z G po kolei. Po zastosowaniu tej procedury graf na wyjściu nie będzie miał wierzchołków poindeksowanych po kolei, można albo tak zostawić (tylko wtedy format zapisu grafu musi taką sytuację uwzględnić), albo wierzchołki przeindeksować, żeby były po kolei. Sygnatura tej funkcji wygląda następująco:
+void transform(unordered_map<int, vector<int>> &inputGraph, unordered_map<int, vector<int>> &outputGraph) {}
+Nie musisz wypisywać całego programu, tylko tą funkcję. Niech program będzie możliwie prosty, a nazwy zmiennych i funkcji możliwie krótkie i czytelne.
+
+
+
+
